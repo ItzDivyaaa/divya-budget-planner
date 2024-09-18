@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -14,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { db } from '@/utils/dbConfig'
 import { Budgets } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
+import { toast } from 'sonner'
   
 
 function CreateBudget() {
@@ -34,7 +37,7 @@ function CreateBudget() {
         }).returning({insertedId:Budgets.id})
 
         if(result){
-            
+            toast('New Budget Created!')
         }
 
     }
@@ -83,14 +86,19 @@ function CreateBudget() {
         />
 
     </div>
-    <Button 
-    disabled={!(name&&amount)}
-    onClick={()=>onCreateBudget()}
-    className="mt-5 w-full">Create Budget</Button>
+   
     </div>
       </DialogDescription>
 
     </DialogHeader>
+    <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+          <Button 
+    disabled={!(name&&amount)}
+    onClick={()=>onCreateBudget()}
+    className="mt-5 w-full">Create Budget</Button>
+          </DialogClose>
+        </DialogFooter>
   </DialogContent>
 </Dialog>
 

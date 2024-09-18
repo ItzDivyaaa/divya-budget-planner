@@ -6,3 +6,5 @@ export const Budgets=pgTable('budgets',{
     icon:varchar('icon'), 
     createdBy:varchar('createdBy').notNull()
 })
+
+// export const Expenses=pgTable('')
