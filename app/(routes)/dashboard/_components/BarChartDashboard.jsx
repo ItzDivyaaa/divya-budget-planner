@@ -3,13 +3,14 @@ import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'
 
 function BarChartDashboard({budgetList}) {
   return (
-    <div>
+    <div className='border rounded-lg p-5'>
+      <h2 className='font-bold text-lg'>Activity</h2>
       <BarChart
       width={500}
       height={300}
       data={budgetList}
       margin={{
-        top:5,
+        top:7,
         right:5,
         left:5, 
         bottom:5

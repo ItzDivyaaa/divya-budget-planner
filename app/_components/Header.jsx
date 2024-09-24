@@ -10,12 +10,8 @@ function Header() {
   return (
     <div className="p-5 flex justify-between items-center border shadow-md">
       {/* Make sure the logo is in the 'public' directory for the Image component */}
-      <Image
-        src="/logo.svg" // Use a path relative to the public folder
-        alt="logo"
-        width={160}
-        height={100}
-      />
+      <Image src={'/logo2.png'} alt='logo' height={100} width={160}></Image>
+
       {isSignedIn ? (
         <UserButton />
       ) : (

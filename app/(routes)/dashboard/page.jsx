@@ -6,6 +6,7 @@ import { db } from '@/utils/dbConfig';
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import { Budgets, Expenses } from '@/utils/schema';
 import BarChartDashboard from './_components/BarChartDashboard';
+import BudgetItem from './budgets/_components/BudgetItem';
 
 function dashboard() {
   const {user}=useUser();
@@ -33,6 +34,16 @@ function dashboard() {
    setBugetList(result);
   }
 
+  // const getAllExpenses=async()=>{
+  //   const result=await db.select({
+  //     id:Expenses.id,
+  //     name:Expenses.name,
+  //     amount:Expenses.amount,
+  //     createdBy:Expenses.createdBy
+  //   }).from(Budgets)
+  //   .rightJoin(Expenses,eq(Budgets.id,Expenses.budgetid))
+  // }
+
   return (
     <div className='p-9'>
       <h2 className='font-bold text-gray-600 text-3xl'>Hi, {user?.fullName}! ✨</h2>
@@ -46,7 +57,9 @@ function dashboard() {
             />
         </div>
         <div>
-            Other Content
+              {budgetList.map((budget,index)=>(
+                <BudgetItem budget={budget} key={index}/>
+              ))}
         </div>
 
       </div>
