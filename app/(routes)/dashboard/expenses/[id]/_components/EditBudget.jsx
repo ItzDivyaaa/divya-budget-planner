@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { PenBox } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogClose,
@@ -15,16 +15,39 @@ import {
 import EmojiPicker from 'emoji-picker-react'
 import { useUser } from '@clerk/nextjs'
 import { Input } from '@/components/ui/input'
+import { toast } from 'sonner'
+import { db } from '@/utils/dbConfig'
+import { Budgets } from '@/utils/schema'
+import { eq } from 'drizzle-orm'
 
-function EditBudget() {
-    const [emojiIcon, setEmojiIcon]=useState('😊');
+function EditBudget({budgetInfo,refreshData}) {
+    if (!budgetInfo) {
+        return <div>Loading...</div>;
+      }
+    const [emojiIcon, setEmojiIcon]=useState(budgetInfo?.icon);
     const [openEmojiPicker, setOpenEmojiPicker]=useState(false);
     const [name,setName]=useState();
     const [amount,setAmount]=useState();
 
     const {user}=useUser();
-    const onUpdateBudget=()=>{
 
+    useEffect(()=>{
+        setEmojiIcon(budgetInfo?.icon)
+        setAmount(budgetInfo?.amount)
+        setName(budgetInfo?.name)
+    },[budgetInfo])
+    const onUpdateBudget=async()=>{
+            const result=await db.update(Budgets).set({
+                name:name, 
+                amount:amount,
+                icon:emojiIcon
+            }).where(eq(Budgets.id,budgetInfo.id))
+            .returning();
+
+            if(result){
+                toast('Budget Updated!');
+                refreshData();
+            }
     }
 
   return (
@@ -36,7 +59,7 @@ function EditBudget() {
   </DialogTrigger>
   <DialogContent className="bg-white text-black">
     <DialogHeader>
-      <DialogTitle>Update New Budget</DialogTitle>
+      <DialogTitle>Update Budget</DialogTitle>
       <DialogDescription>
         <div className='mt-5'>
         <Button variant="outline"
@@ -57,6 +80,7 @@ function EditBudget() {
     <div>
         <h2>Budget Name</h2>
         <Input placeholder="e.g. Home Decor"
+        defaultValue={budgetInfo?.name}
         onChange={(e)=>setName(e.target.value)}
         />
     </div>
@@ -65,6 +89,8 @@ function EditBudget() {
         <Input
         type="number"
         placeholder="5000"
+        defaultValue={budgetInfo?.name}
+
         onChange={(e)=>setAmount(e.target.value)}
         />
 
