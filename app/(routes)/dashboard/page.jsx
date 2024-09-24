@@ -5,6 +5,7 @@ import CardInfo from './_components/CardInfo';
 import { db } from '@/utils/dbConfig';
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import { Budgets, Expenses } from '@/utils/schema';
+import BarChartDashboard from './_components/BarChartDashboard';
 
 function dashboard() {
   const {user}=useUser();
@@ -37,6 +38,19 @@ function dashboard() {
       <h2 className='font-bold text-gray-600 text-3xl'>Hi, {user?.fullName}! ✨</h2>
       <p className='text-gray-500'>Here's what's happening  with your money. Let's manage your expenses.</p>
       <CardInfo budgetList={budgetList}/>
+
+      <div className='grid grid-cols-1 md:grid-cols-3 mt-6'>
+        <div className='md:col-span-2'>
+            <BarChartDashboard
+            budgetList={budgetList}
+            />
+        </div>
+        <div>
+            Other Content
+        </div>
+
+      </div>
+
     </div>
   )
 }
