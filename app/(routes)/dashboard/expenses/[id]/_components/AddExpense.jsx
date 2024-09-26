@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 import { toast } from 'sonner';
 import moment from 'moment';
 
-function AddExpense({budgetId,user}) {
+function AddExpense({budgetId,user, refreshData}) {
     const [name,setName]=useState();
     const [amount,setAmount]=useState();
     const addNewExpense=async () => {
@@ -15,10 +15,11 @@ function AddExpense({budgetId,user}) {
         name:name,
         amount:amount,
         budgetId:budgetId,
-        createdBy:moment().format('DD/MM/YYYY')
+        createdBy:user?.primaryEmailAddress?.emailAddress
         }).returning({insertedId:Budgets.id});
 
         if(result){
+            refreshData();
             toast('New Expense Added!')
         }
     }

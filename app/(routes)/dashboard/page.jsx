@@ -56,11 +56,11 @@ function dashboard() {
             budgetList={budgetList}
             />
         </div>
-        <div>
+        {/* <div>
               {budgetList.map((budget,index)=>(
                 <BudgetItem budget={budget} key={index}/>
               ))}
-        </div>
+        </div> */}
 
       </div>
 

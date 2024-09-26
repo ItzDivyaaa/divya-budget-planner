@@ -24,18 +24,13 @@ function Hero() {
     
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <button
-              className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-900 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+              className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-purple-900 focus:outline-none focus:ring active:bg-purple-600 sm:w-auto"
               onClick={handleGetStarted}
             >
               Get Started
             </button>
     
-            <a
-              className="block w-full rounded px-12 py-3 text-sm font-medium text-primary shadow hover:text-blue-500 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
-              href="#"
-            >
-              Learn More
-            </a>
+            
           </div>
         </div>
       </div>
