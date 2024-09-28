@@ -34,15 +34,6 @@ function dashboard() {
    setBugetList(result);
   }
 
-  // const getAllExpenses=async()=>{
-  //   const result=await db.select({
-  //     id:Expenses.id,
-  //     name:Expenses.name,
-  //     amount:Expenses.amount,
-  //     createdBy:Expenses.createdBy
-  //   }).from(Budgets)
-  //   .rightJoin(Expenses,eq(Budgets.id,Expenses.budgetid))
-  // }
 
   return (
     <div className='p-9'>
@@ -56,11 +47,7 @@ function dashboard() {
             budgetList={budgetList}
             />
         </div>
-        {/* <div>
-              {budgetList.map((budget,index)=>(
-                <BudgetItem budget={budget} key={index}/>
-              ))}
-        </div> */}
+        
 
       </div>
 

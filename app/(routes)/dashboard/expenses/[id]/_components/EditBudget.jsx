@@ -88,7 +88,7 @@ function EditBudget({budgetInfo,refreshData}) {
         <h2>Budget Amount</h2>
         <Input
         type="number"
-        placeholder="e.g.5000"
+        placeholder="e.g.₹5000"
         defaultValue={budgetInfo?.name}
 
         onChange={(e)=>setAmount(e.target.value)}
